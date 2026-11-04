@@ -5,3 +5,12 @@ export { fonts, fontWeights } from './fonts';
 
 export { TextVariant, typography } from './typography';
 export type { TypographyVariant } from './typography';
+
+export {
+  statusTone,
+  reportStatusTone,
+  attachmentStatusTone,
+  reportStatusTones,
+  attachmentStatusTones,
+  type StatusTone,
+} from './status';

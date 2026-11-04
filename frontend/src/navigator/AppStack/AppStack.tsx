@@ -1,6 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import { ReportDetailScreen } from '../../screens';
 import { colors } from '../../theme';
 import { AppTabs } from '../AppTabs/AppTabs';
 import type { AppStackParamList, NavigationProps } from '../types';
@@ -19,6 +20,11 @@ export function AppStack(props: NavigationProps) {
         initialRouteName="Main"
       >
         <Stack.Screen name="Main" component={AppTabs} />
+        <Stack.Screen
+          name="ReportDetailScreen"
+          component={ReportDetailScreen}
+          options={{ animation: 'slide_from_right' }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

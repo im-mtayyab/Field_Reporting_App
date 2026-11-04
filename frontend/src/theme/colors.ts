@@ -20,6 +20,16 @@ export const colors = {
   footer: '#07295D',
   footerBar: '#1E3A5F',
   radialEdge: '#151515',
+
+  // Status chips
+  statusPendingBg: '#E8EEF4',
+  statusPendingText: '#556677',
+  statusUploadingBg: '#F9BE57',
+  statusUploadingText: '#2C3E50',
+  statusDeliveredBg: '#D1FAE5',
+  statusDeliveredText: '#065F46',
+  statusFailedBg: '#FEE2E2',
+  statusFailedText: '#991B1B',
 } as const;
 
 export type ColorName = keyof typeof colors;

@@ -1,11 +1,18 @@
 import { ComponentProps } from 'react';
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import {
+  BottomTabNavigationProp,
+  BottomTabScreenProps,
+} from '@react-navigation/bottom-tabs';
+import {
+  CompositeNavigationProp,
   CompositeScreenProps,
   NavigationContainer,
   NavigatorScreenParams,
 } from '@react-navigation/native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
 
 export type MainTabParamList = {
   HomeScreen: undefined;
@@ -17,6 +24,7 @@ export type MainTabParamList = {
 
 export type AppStackParamList = {
   Main: NavigatorScreenParams<MainTabParamList>;
+  ReportDetailScreen: { reportId: string };
 };
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> =
@@ -27,6 +35,11 @@ export type MainTabScreenProps<T extends keyof MainTabParamList> =
     BottomTabScreenProps<MainTabParamList, T>,
     AppStackScreenProps<keyof AppStackParamList>
   >;
+
+export type ReportsScreenNavigationProp = CompositeNavigationProp<
+  BottomTabNavigationProp<MainTabParamList, 'ReportsScreen'>,
+  NativeStackNavigationProp<AppStackParamList>
+>;
 
 export interface NavigationProps
   extends Partial<
