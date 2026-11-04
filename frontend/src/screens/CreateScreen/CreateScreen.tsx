@@ -1,27 +1,28 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import { AppFormScreen, AppText, TextVariant } from '../../components';
+import { AppHeader, AppScreen, AppText, TextVariant } from '../../components';
 
 export function CreateScreen() {
   return (
-    <AppFormScreen contentStyle={styles.content}>
-      <AppText variant={TextVariant.Headline} color="primary">
-        Create
-      </AppText>
-      <AppText variant={TextVariant.Body} color="textSoft" style={styles.subtitle}>
-        Create a new field report
-      </AppText>
-    </AppFormScreen>
+    <AppScreen padded={false} style={styles.flex}>
+      <AppHeader />
+      <View style={styles.body}>
+        <AppText variant={TextVariant.Body} color="textSoft">
+          Create a new field report
+        </AppText>
+      </View>
+    </AppScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  content: {
+  flex: {
+    flex: 1,
+  },
+  body: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  subtitle: {
-    marginTop: 8,
-    textAlign: 'center',
+    paddingHorizontal: 24,
   },
 });

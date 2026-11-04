@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Image as ImageIcon } from 'lucide-react-native';
 
@@ -99,6 +100,7 @@ function SectionHeader({ children }: { children: string }) {
 export function ReportDetailScreen({ route }: Props) {
   const { reportId } = route.params;
   const { width } = useWindowDimensions();
+  const insets = useSafeAreaInsets();
   const [state, setState] = useState<LoadState>({ status: 'loading' });
 
   const cell = (width - H_PAD * 2 - GAP) / 2;
@@ -168,7 +170,10 @@ export function ReportDetailScreen({ route }: Props) {
     <AppScreen padded={false} style={styles.flex}>
       <AppHeader title="Report" showBack />
       <ScrollView
-        contentContainerStyle={styles.scroll}
+        contentContainerStyle={[
+          styles.scroll,
+          { paddingBottom: 24 + insets.bottom },
+        ]}
         showsVerticalScrollIndicator={false}
       >
         {/* Headline + supporting text (M3 content hierarchy) */}
@@ -284,7 +289,6 @@ const styles = StyleSheet.create({
   scroll: {
     paddingHorizontal: H_PAD,
     paddingTop: 20,
-    paddingBottom: 40,
     gap: 28,
   },
   headlineBlock: {

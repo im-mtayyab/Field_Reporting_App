@@ -1,27 +1,28 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import { AppScreen, AppText, TextVariant } from '../../components';
+import { AppHeader, AppScreen, AppText, TextVariant } from '../../components';
 
 export function SyncScreen() {
   return (
-    <AppScreen contentStyle={styles.content}>
-      <AppText variant={TextVariant.Headline} color="primary">
-        Sync
-      </AppText>
-      <AppText variant={TextVariant.Body} color="textSoft" style={styles.subtitle}>
-        Sync Logs and Status
-      </AppText>
+    <AppScreen padded={false} style={styles.flex}>
+      <AppHeader />
+      <View style={styles.body}>
+        <AppText variant={TextVariant.Body} color="textSoft">
+          Sync status will land here.
+        </AppText>
+      </View>
     </AppScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  content: {
+  flex: {
+    flex: 1,
+  },
+  body: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  subtitle: {
-    marginTop: 8,
-    textAlign: 'center',
+    paddingHorizontal: 24,
   },
 });

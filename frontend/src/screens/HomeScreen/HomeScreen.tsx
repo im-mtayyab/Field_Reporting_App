@@ -1,27 +1,28 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import { AppScreen, AppText, TextVariant } from '../../components';
+import { AppHeader, AppScreen, AppText, TextVariant } from '../../components';
 
 export function HomeScreen() {
   return (
-    <AppScreen contentStyle={styles.content}>
-      <AppText variant={TextVariant.Headline} color="primary">
-        Home
-      </AppText>
-      <AppText variant={TextVariant.Body} color="textSoft" style={styles.subtitle}>
-        Field reporting overview
-      </AppText>
+    <AppScreen padded={false} style={styles.flex}>
+      <AppHeader />
+      <View style={styles.body}>
+        <AppText variant={TextVariant.Body} color="textSoft">
+          Field reporting overview
+        </AppText>
+      </View>
     </AppScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  content: {
+  flex: {
+    flex: 1,
+  },
+  body: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  subtitle: {
-    marginTop: 8,
-    textAlign: 'center',
+    paddingHorizontal: 24,
   },
 });
