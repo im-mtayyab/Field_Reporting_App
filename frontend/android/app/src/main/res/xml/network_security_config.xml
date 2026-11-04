@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TODO(Remove): In production, turn cleartext off and use HTTPS only. -->
+<!-- Dev: local API over plain HTTP (emulator / LAN). -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>
