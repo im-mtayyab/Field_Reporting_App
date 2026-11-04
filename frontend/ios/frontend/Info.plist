@@ -35,8 +35,10 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<key>NSCameraUsageDescription</key>
+	<string>Field Reports needs the camera so you can photograph site conditions for a report.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Field Reports needs photo access so you can attach images from your gallery to a report.</string>
 	<key>RCTNewArchEnabled</key>
 	<true/>
 	<key>UIApplicationSceneManifest</key>

@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@bam.tech/react-native-image-resizer": "^3.0.11",
     "@hookform/resolvers": "^7.0.1",
     "@legendapp/list": "^3.7.1",
     "@op-engineering/op-sqlite": "^19.0.3",
@@ -28,6 +29,7 @@
     "react-native-fast-image": "^10.11.0",
     "react-native-gesture-handler": "^3.4.0",
     "react-native-get-random-values": "^2.1.0",
+    "react-native-image-picker": "^8.3.0",
     "react-native-keyboard-controller": "^1.22.9",
     "react-native-mmkv": "^4.3.2",
     "react-native-nitro-modules": "^0.37.1",
