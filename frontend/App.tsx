@@ -1,44 +1,44 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * Field Reporting React Native App
  *
  * @format
  */
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { StatusBar, StyleSheet, View } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+
+import { AppStack } from './src/navigator';
+import { colors } from './src/theme';
 
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
-  );
-}
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
+    <GestureHandlerRootView style={styles.root}>
+      <SafeAreaProvider>
+        <KeyboardProvider statusBarTranslucent navigationBarTranslucent>
+          <StatusBar barStyle="light-content" />
+          {/* Top inset only — bottom inset lives on the tab bar so keyboard
+              avoidance does not stack SafeArea + tab bar + keyboard height. */}
+          <SafeAreaView style={styles.headerSafe} edges={['top']}>
+            <View style={styles.root}>
+              <AppStack />
+            </View>
+          </SafeAreaView>
+        </KeyboardProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  root: {
     flex: 1,
+    backgroundColor: colors.surface,
+  },
+  headerSafe: {
+    flex: 1,
+    backgroundColor: colors.header,
   },
 });
 
