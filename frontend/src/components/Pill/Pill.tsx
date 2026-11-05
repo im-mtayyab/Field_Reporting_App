@@ -29,11 +29,7 @@ export function Pill({ children, tone = 'accent', style }: PillProps) {
   return (
     <View style={[styles.pill, { backgroundColor: TONE_BG[tone] }, style]}>
       {typeof children === 'string' ? (
-        <AppText
-          variant={TextVariant.Caption}
-          color={TONE_TEXT[tone]}
-          style={styles.label}
-        >
+        <AppText variant={TextVariant.Overline} color={TONE_TEXT[tone]}>
           {children}
         </AppText>
       ) : (
@@ -49,8 +45,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 4,
     borderRadius: 0,
-  },
-  label: {
-    fontWeight: '700',
   },
 });

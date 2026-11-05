@@ -10,8 +10,8 @@ import {
 
 type AppTextProps = TextProps & {
   /**
-   * Text style variant.
-   * Values: TextVariant.Display | Headline | Title | Label | Body | Caption
+   * Text style variant from theme.typography.
+   * Values: Display | Headline | Title | Label | Body | Caption | Overline
    */
   variant?: TypographyVariant;
   /** Color token name from theme */

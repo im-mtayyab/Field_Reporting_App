@@ -87,11 +87,7 @@ function DetailListItem({
 
 function SectionHeader({ children }: { children: string }) {
   return (
-    <AppText
-      variant={TextVariant.Title}
-      color="text"
-      style={styles.sectionHeader}
-    >
+    <AppText variant={TextVariant.Label} color="text">
       {children}
     </AppText>
   );
@@ -136,7 +132,7 @@ export function ReportDetailScreen({ route }: Props) {
         <AppHeader title="Report" showBack />
         <View style={styles.centered}>
           <AppText variant={TextVariant.Headline} color="text">
-            Couldn’t load report
+            Unable to load report
           </AppText>
           <AppText
             variant={TextVariant.Body}
@@ -147,7 +143,7 @@ export function ReportDetailScreen({ route }: Props) {
           </AppText>
           {state.error.retryable ? (
             <Button style={styles.retry} onPress={() => void load()}>
-              Try again
+              Retry
             </Button>
           ) : null}
         </View>
@@ -296,9 +292,6 @@ const styles = StyleSheet.create({
   },
   section: {
     gap: 12,
-  },
-  sectionHeader: {
-    fontWeight: '600',
   },
   listGroup: {
     backgroundColor: colors.white,

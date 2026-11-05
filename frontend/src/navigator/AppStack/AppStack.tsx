@@ -1,7 +1,11 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { ReportDetailScreen } from '../../screens';
+import {
+  ReportDetailScreen,
+  SyncLogsScreen,
+  TestToolsScreen,
+} from '../../screens';
 import { colors } from '../../theme';
 import { AppTabs } from '../AppTabs/AppTabs';
 import type { AppStackParamList, NavigationProps } from '../types';
@@ -15,6 +19,10 @@ export function AppStack(props: NavigationProps) {
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
+          animation: 'slide_from_right',
+          animationTypeForReplace: 'push',
+          gestureEnabled: true,
+          fullScreenGestureEnabled: true,
           contentStyle: { backgroundColor: colors.surface },
         }}
         initialRouteName="Main"
@@ -23,8 +31,9 @@ export function AppStack(props: NavigationProps) {
         <Stack.Screen
           name="ReportDetailScreen"
           component={ReportDetailScreen}
-          options={{ animation: 'slide_from_right' }}
         />
+        <Stack.Screen name="SyncLogsScreen" component={SyncLogsScreen} />
+        <Stack.Screen name="TestToolsScreen" component={TestToolsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

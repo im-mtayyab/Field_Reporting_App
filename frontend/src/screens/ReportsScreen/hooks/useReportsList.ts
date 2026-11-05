@@ -4,6 +4,7 @@ import {
   listReportsAction,
   type ListReportsActionResult,
 } from '../../../actions/reportActions';
+import { useReportsCache } from '../../../store/reportsCache';
 import type { Report } from '../../../types/report';
 
 const PAGE_SIZE = 10;
@@ -20,9 +21,19 @@ type ReportsListState =
       hasMore: boolean;
     };
 
-/** First page on mount; pull-to-refresh; scroll loads the next page. */
+/** First page on mount (reuses cache); pull-to-refresh; scroll loads next page. */
 export function useReportsList() {
-  const [state, setState] = useState<ReportsListState>({ status: 'loading' });
+  const cache = useReportsCache();
+  const [state, setState] = useState<ReportsListState>(() =>
+    cache.loadedOnce
+      ? {
+          status: 'ready',
+          reports: cache.reports,
+          total: cache.total,
+          hasMore: cache.hasMore,
+        }
+      : { status: 'loading' },
+  );
   const [refreshing, setRefreshing] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
   const loadingMoreRef = useRef(false);
@@ -32,7 +43,7 @@ export function useReportsList() {
   const loadInitial = useCallback(async (isRefresh = false) => {
     if (isRefresh) {
       setRefreshing(true);
-    } else {
+    } else if (!useReportsCache.getState().loadedOnce) {
       setState({ status: 'loading' });
     }
 
@@ -43,6 +54,12 @@ export function useReportsList() {
       setRefreshing(false);
       return;
     }
+
+    useReportsCache.getState().setPage({
+      reports: result.reports,
+      total: result.total,
+      hasMore: result.hasMore,
+    });
 
     setState({
       status: 'ready',
@@ -75,6 +92,13 @@ export function useReportsList() {
       return;
     }
 
+    useReportsCache.getState().setPage({
+      reports: result.reports,
+      total: result.total,
+      hasMore: result.hasMore,
+      append: true,
+    });
+
     setState((prev) => {
       if (prev.status !== 'ready') {
         return prev;
@@ -94,6 +118,16 @@ export function useReportsList() {
   }, []);
 
   useEffect(() => {
+    if (useReportsCache.getState().loadedOnce) {
+      const cached = useReportsCache.getState();
+      setState({
+        status: 'ready',
+        reports: cached.reports,
+        total: cached.total,
+        hasMore: cached.hasMore,
+      });
+      return;
+    }
     void loadInitial();
   }, [loadInitial]);
 

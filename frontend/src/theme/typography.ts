@@ -20,6 +20,8 @@ export const TextVariant = {
   Label: 'label',
   Body: 'body',
   Caption: 'caption',
+  /** Uppercase section / chip labels */
+  Overline: 'overline',
 } as const;
 
 export type TypographyVariant = (typeof TextVariant)[keyof typeof TextVariant];
@@ -78,5 +80,14 @@ export const typography: Record<TypographyVariant, TextVariantStyle> = {
     lineHeight: 16,
     fontWeight: fontWeights.regular,
     letterSpacing: 0.2,
+  },
+
+  /** Uppercase chips, section labels, badges */
+  [TextVariant.Overline]: {
+    fontFamily: fonts.bold,
+    fontSize: 11,
+    lineHeight: 16,
+    fontWeight: fontWeights.bold,
+    letterSpacing: 0.6,
   },
 };

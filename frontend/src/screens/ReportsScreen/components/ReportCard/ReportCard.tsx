@@ -64,12 +64,7 @@ function ReportCardComponent({ report, onPress }: ReportCardProps) {
           </View>
 
           <View style={styles.body}>
-            <AppText
-              variant={TextVariant.Body}
-              color="text"
-              numberOfLines={3}
-              style={styles.description}
-            >
+            <AppText variant={TextVariant.Body} color="text" numberOfLines={3}>
               {description}
             </AppText>
             <AppText
@@ -144,9 +139,6 @@ const styles = StyleSheet.create({
     minWidth: 0,
     justifyContent: 'flex-start',
     paddingTop: 2,
-  },
-  description: {
-    fontWeight: '400',
   },
   meta: {
     marginTop: 6,

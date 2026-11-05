@@ -10,7 +10,11 @@ export {
   statusTone,
   reportStatusTone,
   attachmentStatusTone,
+  uploadReportStatusTone,
+  uploadAttachmentStatusTone,
   reportStatusTones,
   attachmentStatusTones,
+  uploadReportStatusTones,
+  uploadAttachmentStatusTones,
   type StatusTone,
 } from './status';

@@ -25,6 +25,8 @@ export type MainTabParamList = {
 export type AppStackParamList = {
   Main: NavigatorScreenParams<MainTabParamList>;
   ReportDetailScreen: { reportId: string };
+  SyncLogsScreen: { reportId?: string; title?: string } | undefined;
+  TestToolsScreen: undefined;
 };
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> =

@@ -1,4 +1,4 @@
-import { deleteReportsService } from '../../services/reportService/reportService';
+import { deleteReportsService } from '../../services/reportService';
 
 export type DeleteReportsActionResult =
   | { ok: true; removedReports: number }
@@ -9,7 +9,7 @@ export type DeleteReportsActionResult =
       retryable: boolean;
     };
 
-/** Wipe all reports on the server (dev/reset). */
+/** Removes all reports on the server (development and reset tooling). */
 export async function deleteReportsAction(): Promise<DeleteReportsActionResult> {
   const res = await deleteReportsService();
 
@@ -24,7 +24,7 @@ export async function deleteReportsAction(): Promise<DeleteReportsActionResult> 
         case 'InvalidData':
           return {
             ok: false as const,
-            message: 'Got an unexpected response from the server.',
+            message: 'The server returned an unexpected response.',
             details: error.details,
             retryable: true,
           };
@@ -32,13 +32,14 @@ export async function deleteReportsAction(): Promise<DeleteReportsActionResult> 
           return {
             ok: false as const,
             message:
-              'Cannot reach the server. Check Wi‑Fi or that the API is running.',
+              'Unable to reach the server. Please check your network connection and try again.',
             retryable: true,
           };
         case 'Timeout':
           return {
             ok: false as const,
-            message: 'The server took too long to respond. Try again.',
+            message:
+              'The server did not respond in time. Please try again shortly.',
             retryable: true,
           };
         case 'Conflict':
@@ -46,25 +47,29 @@ export async function deleteReportsAction(): Promise<DeleteReportsActionResult> 
             ok: false as const,
             message:
               error.message ||
-              'This conflicts with data already on the server.',
+              'This request conflicts with data already stored on the server.',
             retryable: false,
           };
         case 'Rejected':
           return {
             ok: false as const,
-            message: error.message || 'The server refused this delete.',
+            message:
+              error.message || 'The server declined this delete request.',
             retryable: false,
           };
         case 'Server':
           return {
             ok: false as const,
-            message: 'The server hit an error. You can retry in a moment.',
+            message:
+              'The server encountered an error. Please try again in a moment.',
             retryable: true,
           };
         case 'Unexpected':
           return {
             ok: false as const,
-            message: error.message || 'Something went wrong. Please try again.',
+            message:
+              error.message ||
+              'An unexpected error occurred. Please try again.',
             retryable: true,
           };
         default:

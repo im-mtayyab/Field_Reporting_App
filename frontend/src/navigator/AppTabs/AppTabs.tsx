@@ -78,7 +78,7 @@ export function AppTabs() {
         name="SyncScreen"
         component={SyncScreen}
         options={{
-          tabBarLabel: 'Sync',
+          tabBarLabel: 'Upload',
           tabBarIcon: ({ color, focused }) => (
             <TabIcon Icon={RefreshCw} color={color} focused={focused} />
           ),
@@ -104,7 +104,6 @@ const styles = StyleSheet.create({
   },
   tabBarLabel: {
     ...typography[TextVariant.Caption],
-    fontWeight: '500',
     marginTop: 2,
   },
 });

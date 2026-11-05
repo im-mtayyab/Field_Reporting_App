@@ -39,35 +39,37 @@ export type ErrorViewModel = {
 };
 
 /**
- * Exhaustive UI copy per AppErrorCode.
- * Adding a new code (e.g. DUPLICATE) without a case is a TypeScript error.
+ * Exhaustive user-facing copy for each AppErrorCode.
+ * Adding a code without a matching case is a TypeScript error.
  */
 export function getErrorView(error: AppError): ErrorViewModel {
   switch (error.code) {
     case 'CONNECTION_ERR':
       return {
-        title: 'Cannot reach the server',
+        title: 'Unable to reach the server',
         message:
-          'Check Wi‑Fi or that the API is running, then try again.',
+          'Please verify your network connection and that the service is available, then try again.',
         retryable: true,
       };
     case 'TIMEOUT':
       return {
         title: 'Request timed out',
-        message: 'The server took too long to respond. Try again.',
+        message:
+          'The server did not respond in time. Please try again shortly.',
         retryable: true,
       };
     case 'NOT_FOUND':
       return {
         title: 'Not found',
-        message: error.message || 'That report was not found.',
+        message: error.message || 'The requested report could not be found.',
         retryable: false,
       };
     case 'VALIDATION':
       return {
         title: 'Invalid request',
         message:
-          error.message || 'Some fields look invalid. Check and try again.',
+          error.message ||
+          'One or more fields are invalid. Please review and try again.',
         retryable: false,
       };
     case 'CONFLICT':
@@ -75,31 +77,32 @@ export function getErrorView(error: AppError): ErrorViewModel {
         title: 'Conflict',
         message:
           error.message ||
-          'This conflicts with data already on the server.',
+          'This request conflicts with data already stored on the server.',
         retryable: false,
       };
     case 'REJECTED':
       return {
-        title: 'Rejected',
-        message: error.message || 'The server refused this upload.',
+        title: 'Request declined',
+        message: error.message || 'The server declined this request.',
         retryable: false,
       };
     case 'SERVER':
       return {
         title: 'Server error',
-        message: 'The server hit an error. You can retry in a moment.',
+        message:
+          'The server encountered an error. Please try again in a moment.',
         retryable: true,
       };
     case 'BAD_DATA':
       return {
         title: 'Unexpected response',
-        message: 'Got an unexpected response from the server.',
+        message: 'The server returned an unexpected response. Please try again.',
         retryable: true,
       };
     case 'UNKNOWN':
       return {
         title: 'Something went wrong',
-        message: error.message || 'Please try again.',
+        message: error.message || 'An unexpected error occurred. Please try again.',
         retryable: error.retryable,
       };
     default:
@@ -107,7 +110,7 @@ export function getErrorView(error: AppError): ErrorViewModel {
   }
 }
 
-/** Short, specific copy for toasts / empty states (exhaustive). */
+/** Short message for toasts and empty states. */
 export function getErrorMessage(error: AppError): string {
   return getErrorView(error).message;
 }

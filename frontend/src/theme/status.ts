@@ -1,3 +1,7 @@
+import {
+  UploadAttachmentStatus,
+  UploadReportStatus,
+} from '../types/uploadQueue';
 import { AttachmentStatus, ReportStatus } from '../types/report';
 import { colors } from './colors';
 
@@ -62,10 +66,86 @@ export const attachmentStatusTones: Record<AttachmentStatus, StatusTone> = {
   },
 };
 
+/** Local upload-queue report chips (Sync screen). */
+export const uploadReportStatusTones: Record<UploadReportStatus, StatusTone> = {
+  [UploadReportStatus.Pending]: {
+    backgroundColor: colors.statusPendingBg,
+    color: colors.statusPendingText,
+    label: 'Queued',
+  },
+  [UploadReportStatus.Uploading]: {
+    backgroundColor: colors.statusUploadingBg,
+    color: colors.statusUploadingText,
+    label: 'Uploading',
+  },
+  [UploadReportStatus.Delivered]: {
+    backgroundColor: colors.statusDeliveredBg,
+    color: colors.statusDeliveredText,
+    label: 'Delivered',
+  },
+  [UploadReportStatus.Failed]: {
+    backgroundColor: colors.statusFailedBg,
+    color: colors.statusFailedText,
+    label: 'Failed',
+  },
+};
+
+/** Local attachment chips (Sync accordion files). */
+export const uploadAttachmentStatusTones: Record<
+  UploadAttachmentStatus,
+  StatusTone
+> = {
+  [UploadAttachmentStatus.Pending]: {
+    backgroundColor: colors.statusPendingBg,
+    color: colors.statusPendingText,
+    label: 'Waiting',
+  },
+  [UploadAttachmentStatus.Preparing]: {
+    backgroundColor: colors.statusUploadingBg,
+    color: colors.statusUploadingText,
+    label: 'Preparing',
+  },
+  [UploadAttachmentStatus.Uploading]: {
+    backgroundColor: colors.statusUploadingBg,
+    color: colors.statusUploadingText,
+    label: 'Uploading',
+  },
+  [UploadAttachmentStatus.Paused]: {
+    backgroundColor: colors.statusUploadingBg,
+    color: colors.statusUploadingText,
+    label: 'Paused',
+  },
+  [UploadAttachmentStatus.Cancelled]: {
+    backgroundColor: colors.statusPendingBg,
+    color: colors.statusPendingText,
+    label: 'Cancelled',
+  },
+  [UploadAttachmentStatus.Uploaded]: {
+    backgroundColor: colors.statusDeliveredBg,
+    color: colors.statusDeliveredText,
+    label: 'Done',
+  },
+  [UploadAttachmentStatus.Failed]: {
+    backgroundColor: colors.statusFailedBg,
+    color: colors.statusFailedText,
+    label: 'Failed',
+  },
+};
+
 export function reportStatusTone(status: ReportStatus): StatusTone {
   return statusTone(reportStatusTones, status);
 }
 
 export function attachmentStatusTone(status: AttachmentStatus): StatusTone {
   return statusTone(attachmentStatusTones, status);
+}
+
+export function uploadReportStatusTone(status: UploadReportStatus): StatusTone {
+  return statusTone(uploadReportStatusTones, status);
+}
+
+export function uploadAttachmentStatusTone(
+  status: UploadAttachmentStatus,
+): StatusTone {
+  return statusTone(uploadAttachmentStatusTones, status);
 }

@@ -13,7 +13,7 @@ import { colors } from '../../theme';
 import { AppText, TextVariant } from '../AppText/AppText';
 
 const APP_NAME = 'Field Reports';
-const SIDE = 88; // matches two icon buttons — keeps title truly centered
+const SIDE = 88;
 
 type AppHeaderProps = {
   /** Stack screen title when showBack is set. */
@@ -130,8 +130,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.header,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.footerBar,
   },
   barBack: {
     paddingLeft: 4,
@@ -139,7 +137,6 @@ const styles = StyleSheet.create({
   },
   brand: {
     flex: 1,
-    fontWeight: '700',
   },
   actions: {
     flexDirection: 'row',
@@ -156,7 +153,6 @@ const styles = StyleSheet.create({
   centerTitle: {
     flex: 1,
     textAlign: 'center',
-    fontWeight: '600',
   },
   iconBtn: {
     width: 44,

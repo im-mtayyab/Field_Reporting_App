@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
+import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 
 import type { StatusTone } from '../../theme';
+import { AppText, TextVariant } from '../AppText/AppText';
 
 type StatusPillProps = {
   /** Any domain can pass a tone (reports, attachments, logs, …). */
@@ -14,7 +15,12 @@ export function StatusPill({ tone, style }: StatusPillProps) {
     <View
       style={[styles.pill, { backgroundColor: tone.backgroundColor }, style]}
     >
-      <Text style={[styles.label, { color: tone.color }]}>{tone.label}</Text>
+      <AppText
+        variant={TextVariant.Overline}
+        style={[styles.label, { color: tone.color }]}
+      >
+        {tone.label}
+      </AppText>
     </View>
   );
 }
@@ -25,11 +31,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 4,
     borderRadius: 0,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'transparent',
   },
   label: {
-    fontSize: 12,
-    lineHeight: 16,
-    fontWeight: '700',
-    letterSpacing: 0.2,
+    textTransform: 'uppercase',
   },
 });

@@ -1,4 +1,4 @@
-import { listReportsService } from '../../services/reportService/reportService';
+import { listReportsService } from '../../services/reportService';
 import type { ListReportsParams, Report } from '../../types/report';
 
 export type ListReportsActionResult =
@@ -38,7 +38,7 @@ export async function listReportsAction(
         case 'InvalidData':
           return {
             ok: false as const,
-            message: 'Got an unexpected response from the server.',
+            message: 'The server returned an unexpected response.',
             details: error.details,
             retryable: true,
           };
@@ -46,25 +46,29 @@ export async function listReportsAction(
           return {
             ok: false as const,
             message:
-              'Cannot reach the server. Check Wi‑Fi or that the API is running.',
+              'Unable to reach the server. Please check your network connection and try again.',
             retryable: true,
           };
         case 'Timeout':
           return {
             ok: false as const,
-            message: 'The server took too long to respond. Try again.',
+            message:
+              'The server did not respond in time. Please try again shortly.',
             retryable: true,
           };
         case 'Server':
           return {
             ok: false as const,
-            message: 'The server hit an error. You can retry in a moment.',
+            message:
+              'The server encountered an error. Please try again in a moment.',
             retryable: true,
           };
         case 'Unexpected':
           return {
             ok: false as const,
-            message: error.message || 'Something went wrong. Please try again.',
+            message:
+              error.message ||
+              'An unexpected error occurred. Please try again.',
             retryable: true,
           };
         default:

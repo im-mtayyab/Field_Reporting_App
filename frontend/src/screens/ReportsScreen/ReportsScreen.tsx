@@ -15,6 +15,7 @@ import {
   AppText,
   Button,
   EmptyState,
+  ScreenIntro,
   TextVariant,
 } from '../../components';
 import type { ReportsScreenNavigationProp } from '../../navigator/types';
@@ -37,22 +38,22 @@ function ReportsError({
   return (
     <AppScreen padded={false} style={styles.flex}>
       <AppHeader />
-      <View style={styles.centered}>
-        <AppText variant={TextVariant.Headline} color="text">
-          Couldn’t load reports
-        </AppText>
-        <AppText
-          variant={TextVariant.Body}
-          color="textSoft"
-          style={styles.errorBody}
-        >
-          {message}
-        </AppText>
-        {retryable ? (
-          <Button style={styles.retryButton} onPress={onRetry}>
-            Try again
-          </Button>
-        ) : null}
+      <View style={styles.body}>
+        <ScreenIntro title="Reports" description="Unable to load reports" />
+        <View style={styles.centered}>
+          <AppText
+            variant={TextVariant.Body}
+            color="textSoft"
+            style={styles.errorBody}
+          >
+            {message}
+          </AppText>
+          {retryable ? (
+            <Button style={styles.retryButton} onPress={onRetry}>
+              Try again
+            </Button>
+          ) : null}
+        </View>
       </View>
     </AppScreen>
   );
@@ -62,19 +63,14 @@ function ReportsEmpty() {
   return (
     <AppScreen padded={false} style={styles.flex}>
       <AppHeader />
-      <View style={styles.titleRow}>
-        <AppText variant={TextVariant.Headline} color="text">
-          Reports
-        </AppText>
-        <AppText variant={TextVariant.Caption} color="textSoft">
-          Showing 0 of 0
-        </AppText>
+      <View style={styles.body}>
+        <ScreenIntro title="Reports" description="Showing 0 of 0" />
+        <EmptyState
+          Icon={ClipboardList}
+          title="No reports yet"
+          description="Reports from the server show up here once they exist."
+        />
       </View>
-      <EmptyState
-        Icon={ClipboardList}
-        title="No reports yet"
-        description="Reports from the server show up here once they exist."
-      />
     </AppScreen>
   );
 }
@@ -118,15 +114,6 @@ function ReportsList({
     <AppScreen padded={false} style={styles.flex}>
       <AppHeader />
 
-      <View style={styles.titleRow}>
-        <AppText variant={TextVariant.Headline} color="text">
-          Reports
-        </AppText>
-        <AppText variant={TextVariant.Caption} color="textSoft">
-          Showing {reports.length} of {total}
-        </AppText>
-      </View>
-
       <View style={styles.listPanel}>
         <LegendList
           data={reports}
@@ -137,6 +124,13 @@ function ReportsList({
           drawDistance={400}
           style={styles.list}
           contentContainerStyle={styles.listContent}
+          ListHeaderComponent={
+            <ScreenIntro
+              title="Reports"
+              description={`Showing ${reports.length} of ${total}`}
+              style={styles.intro}
+            />
+          }
           onEndReached={handleEndReached}
           onEndReachedThreshold={0.35}
           ListFooterComponent={
@@ -163,8 +157,7 @@ function ReportsList({
 }
 
 export function ReportsScreen() {
-  const navigation =
-    useNavigation<ReportsScreenNavigationProp>();
+  const navigation = useNavigation<ReportsScreenNavigationProp>();
   const { state, refreshing, loadingMore, reload, refresh, loadMore } =
     useReportsList();
 
@@ -179,15 +172,11 @@ export function ReportsScreen() {
     return (
       <AppScreen padded={false} style={styles.flex}>
         <AppHeader />
-        <View style={styles.centered}>
-          <ActivityIndicator color={colors.primary} size="large" />
-          <AppText
-            variant={TextVariant.Body}
-            color="textSoft"
-            style={styles.hint}
-          >
-            Loading reports…
-          </AppText>
+        <View style={styles.body}>
+          <ScreenIntro title="Reports" description="Loading reports…" />
+          <View style={styles.centered}>
+            <ActivityIndicator color={colors.primary} size="large" />
+          </View>
         </View>
       </AppScreen>
     );
@@ -225,15 +214,14 @@ const styles = StyleSheet.create({
   flex: {
     flex: 1,
   },
-  titleRow: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    justifyContent: 'space-between',
-    gap: 12,
+  body: {
+    flex: 1,
     paddingHorizontal: 16,
     paddingTop: 16,
-    paddingBottom: 10,
     backgroundColor: colors.surface,
+  },
+  intro: {
+    marginBottom: 10,
   },
   centered: {
     flex: 1,
@@ -250,7 +238,7 @@ const styles = StyleSheet.create({
   },
   listContent: {
     paddingHorizontal: 16,
-    paddingTop: 8,
+    paddingTop: 16,
     paddingBottom: 28,
   },
   item: {
@@ -262,10 +250,6 @@ const styles = StyleSheet.create({
   },
   footerSpacer: {
     height: 8,
-  },
-  hint: {
-    marginTop: 8,
-    textAlign: 'center',
   },
   errorBody: {
     marginTop: 8,
