@@ -11,6 +11,7 @@
     "migrate:create": "tsx src/scripts/migrations.create.ts"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.8",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
