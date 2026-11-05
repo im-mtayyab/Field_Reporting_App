@@ -10,14 +10,13 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
-import { ensureDbReady } from './src/db';
 import { AppStack } from './src/navigator';
+import { bootstrapUploadQueue } from './src/uploadQueue';
 import { colors } from './src/theme';
 
 function App() {
   useEffect(() => {
-    // Fire-and-forget: migrate SQLite before any upload-queue work.
-    void ensureDbReady();
+    void bootstrapUploadQueue();
   }, []);
 
   return (

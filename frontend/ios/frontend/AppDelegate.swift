@@ -8,4 +8,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   ) -> Bool {
     true
   }
+
+  func application(
+    _ application: UIApplication,
+    handleEventsForBackgroundURLSession identifier: String,
+    completionHandler: @escaping () -> Void
+  ) {
+    RNBackgroundDownloader.setCompletionHandlerWithIdentifier(
+      identifier,
+      completionHandler: completionHandler
+    )
+  }
 }

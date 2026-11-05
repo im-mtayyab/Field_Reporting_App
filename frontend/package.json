@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^7.0.1",
+    "@kesha-antonov/react-native-background-downloader": "^4.7.0",
     "@legendapp/list": "^3.7.1",
     "@op-engineering/op-sqlite": "^19.0.3",
     "@react-native-community/netinfo": "^12.0.1",
