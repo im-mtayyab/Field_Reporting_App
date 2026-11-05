@@ -10,7 +10,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@bam.tech/react-native-image-resizer": "^3.0.11",
     "@hookform/resolvers": "^7.0.1",
     "@legendapp/list": "^3.7.1",
     "@op-engineering/op-sqlite": "^19.0.3",
@@ -25,6 +24,7 @@
     "react": "19.3.0",
     "react-hook-form": "^7.91.0",
     "react-native": "0.88.1",
+    "react-native-compressor": "^2.0.6",
     "react-native-config": "^1.7.2",
     "react-native-fast-image": "^10.11.0",
     "react-native-gesture-handler": "^3.4.0",
