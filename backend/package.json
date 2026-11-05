@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "start": "tsx src/server.ts",
-    "build": "tsc -p tsconfig.json"
+    "build": "tsc -p tsconfig.json",
+    "migrate": "tsx src/scripts/migrations.run.ts",
+    "migrate:create": "tsx src/scripts/migrations.create.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
