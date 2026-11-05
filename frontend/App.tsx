@@ -4,15 +4,22 @@
  * @format
  */
 
+import { useEffect } from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
+import { ensureDbReady } from './src/db';
 import { AppStack } from './src/navigator';
 import { colors } from './src/theme';
 
 function App() {
+  useEffect(() => {
+    // Fire-and-forget: migrate SQLite before any upload-queue work.
+    void ensureDbReady();
+  }, []);
+
   return (
     <GestureHandlerRootView style={styles.root}>
       <SafeAreaProvider>
