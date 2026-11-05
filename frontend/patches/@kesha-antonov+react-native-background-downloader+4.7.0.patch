@@ -1,0 +1,41 @@
+diff --git a/node_modules/@kesha-antonov/react-native-background-downloader/src/index.ts b/node_modules/@kesha-antonov/react-native-background-downloader/src/index.ts
+index 0000000..1111111 100644
+--- a/node_modules/@kesha-antonov/react-native-background-downloader/src/index.ts
++++ b/node_modules/@kesha-antonov/react-native-background-downloader/src/index.ts
+@@ -59,6 +59,18 @@ function ensureNativeModuleInitialized (): RNBackgroundDownloaderModule & Native
+     // Fall back to old architecture - must use NativeModules for proper event emission
+     RNBackgroundDownloader = NativeModules.RNBackgroundDownloader
+ 
++    // Android New Architecture: TurboModule may not be mirrored onto NativeModules
++    if (!RNBackgroundDownloader && turboModule) {
++      const constants =
++        typeof turboModule.getConstants === 'function'
++          ? turboModule.getConstants()
++          : {}
++      RNBackgroundDownloader = Object.assign(
++        turboModule,
++        constants ?? {},
++      ) as RNBackgroundDownloaderModule & NativeModule
++    }
++
+     // For old architecture, constants may need to be fetched via getConstants() as well
+     if (RNBackgroundDownloader && !RNBackgroundDownloader.documents && typeof RNBackgroundDownloader.getConstants === 'function') {
+       const constants = RNBackgroundDownloader.getConstants()
+diff --git a/node_modules/@kesha-antonov/react-native-background-downloader/lib/index.js b/node_modules/@kesha-antonov/react-native-background-downloader/lib/index.js
+index 0000000..1111111 100644
+--- a/node_modules/@kesha-antonov/react-native-background-downloader/lib/index.js
++++ b/node_modules/@kesha-antonov/react-native-background-downloader/lib/index.js
+@@ -40,6 +40,13 @@ function ensureNativeModuleInitialized() {
+     else {
+         // Fall back to old architecture - must use NativeModules for proper event emission
+         RNBackgroundDownloader = react_native_1.NativeModules.RNBackgroundDownloader;
++        // Android New Architecture: TurboModule may not be mirrored onto NativeModules
++        if (!RNBackgroundDownloader && turboModule) {
++            const constants = typeof turboModule.getConstants === 'function'
++                ? turboModule.getConstants()
++                : {};
++            RNBackgroundDownloader = Object.assign(turboModule, constants !== null && constants !== void 0 ? constants : {});
++        }
+         // For old architecture, constants may need to be fetched via getConstants() as well
+         if (RNBackgroundDownloader && !RNBackgroundDownloader.documents && typeof RNBackgroundDownloader.getConstants === 'function') {
+             const constants = RNBackgroundDownloader.getConstants();
