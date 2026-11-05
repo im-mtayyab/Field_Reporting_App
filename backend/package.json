@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "field-reports-backend",
   "version": "0.0.1",
   "private": true,
@@ -8,7 +8,8 @@
     "start": "tsx src/server.ts",
     "build": "tsc -p tsconfig.json",
     "migrate": "tsx src/scripts/migrations.run.ts",
-    "migrate:create": "tsx src/scripts/migrations.create.ts"
+    "migrate:create": "tsx src/scripts/migrations.create.ts",
+    "setup:supabase": "tsx src/scripts/supabase.setup.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.8",
